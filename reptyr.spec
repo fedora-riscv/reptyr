@@ -1,6 +1,6 @@
 Name:           reptyr
 Version:        0.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/reptyr.1*
 
 %changelog
+* Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Sat May 28 2011 Ville Skyttä <ville.skytta@iki.fi> - 0.3-1
 - Update to 0.3.
 
