@@ -1,13 +1,13 @@
 Name:           reptyr
-Version:        0.3
-Release:        3%{?dist}
+Version:        0.4
+Release:        1%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
 License:        MIT
 URL:            http://github.com/nelhage/reptyr
-# https://github.com/nelhage/reptyr/downloads
-Source0:        nelhage-reptyr-reptyr-0.3-0-g3cad834.tar.gz
+# https://github.com/nelhage/reptyr/tags
+Source0:        nelhage-reptyr-reptyr-0.4-0-g28ca686.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ExclusiveArch:  %{ix86} x86_64 %{arm}
@@ -21,29 +21,35 @@ on home.
 
 
 %prep
-%setup -q -n nelhage-reptyr-b83e8f6
+%setup -q -n nelhage-reptyr-57f9561
 
 
 %build
-make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS -D_GNU_SOURCE"
+make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 make install PREFIX="%{_prefix}" DESTDIR="$RPM_BUILD_ROOT"
+%find_lang %{name} --with-man
 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc ChangeLog COPYING NOTES README
+%doc ChangeLog COPYING NOTES README.md
 %{_bindir}/reptyr
 %{_mandir}/man1/reptyr.1*
 
+
 %changelog
+* Sun Aug 26 2012 Ville Skyttä <ville.skytta@iki.fi> - 0.4-1
+- Update to 0.4.
+- Link with $RPM_LD_FLAGS.
+
 * Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
