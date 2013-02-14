@@ -1,6 +1,6 @@
 Name:           reptyr
 Version:        0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Sun Aug 26 2012 Ville Skyttä <ville.skytta@iki.fi> - 0.4-1
 - Update to 0.4.
 - Link with $RPM_LD_FLAGS.
