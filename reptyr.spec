@@ -1,13 +1,13 @@
 Name:           reptyr
-Version:        0.4
-Release:        2%{?dist}
+Version:        0.5
+Release:        1%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
 License:        MIT
 URL:            http://github.com/nelhage/reptyr
 # https://github.com/nelhage/reptyr/tags
-Source0:        nelhage-reptyr-reptyr-0.4-0-g28ca686.tar.gz
+Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ExclusiveArch:  %{ix86} x86_64 %{arm}
@@ -21,7 +21,7 @@ on home.
 
 
 %prep
-%setup -q -n nelhage-reptyr-57f9561
+%setup -q -n %{name}-%{name}-%{version}
 
 
 %build
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jun 10 2013 Ville Skyttä <ville.skytta@iki.fi> - 0.5-1
+- Update to 0.5.
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
