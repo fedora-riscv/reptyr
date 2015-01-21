@@ -1,6 +1,6 @@
 Name:           reptyr
-Version:        0.5
-Release:        4%{?dist}
+Version:        0.6.1
+Release:        1%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -11,6 +11,8 @@ Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ExclusiveArch:  %{ix86} x86_64 %{arm}
+BuildRequires:  %{_bindir}/python
+BuildRequires:  python-pexpect
 
 %description
 reptyr is a utility for taking an existing running program and
@@ -34,18 +36,28 @@ make install PREFIX="%{_prefix}" DESTDIR="$RPM_BUILD_ROOT"
 %find_lang %{name} --with-man
 
 
+%check
+make test
+
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
-%doc ChangeLog COPYING NOTES README.md
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc ChangeLog NOTES README.md
 %{_bindir}/reptyr
 %{_mandir}/man1/reptyr.1*
 
 
 %changelog
+* Wed Jan 21 2015 Ville Skyttä <ville.skytta@iki.fi> - 0.6.1-1
+- Update to 0.6.1
+- Mark license files as %%license where available
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
