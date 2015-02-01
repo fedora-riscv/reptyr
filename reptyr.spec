@@ -1,5 +1,5 @@
 Name:           reptyr
-Version:        0.6.1
+Version:        0.6.2
 Release:        1%{?dist}
 Summary:        Attach a running process to a new terminal
 
@@ -37,7 +37,7 @@ make install PREFIX="%{_prefix}" DESTDIR="$RPM_BUILD_ROOT"
 
 
 %check
-make test
+make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %clean
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Feb  1 2015 Ville Skyttä <ville.skytta@iki.fi> - 0.6.2-1
+- Update to 0.6.2
+
 * Wed Jan 21 2015 Ville Skyttä <ville.skytta@iki.fi> - 0.6.1-1
 - Update to 0.6.1
 - Mark license files as %%license where available
