@@ -1,3 +1,9 @@
+%if 0%{?fedora}
+%bcond_without tests
+%else
+%bcond_with tests
+%endif
+
 Name:           reptyr
 Version:        0.6.2
 Release:        2%{?dist}
@@ -11,8 +17,12 @@ Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ExclusiveArch:  %{ix86} x86_64 %{arm}
+%if %{with tests}
 BuildRequires:  %{_bindir}/python
 BuildRequires:  python-pexpect
+# https://github.com/nelhage/reptyr/issues/69
+BuildRequires:  kernel-headers >= 3.4
+%endif
 
 %description
 reptyr is a utility for taking an existing running program and
@@ -36,8 +46,10 @@ make install PREFIX="%{_prefix}" DESTDIR="$RPM_BUILD_ROOT"
 %find_lang %{name} --with-man
 
 
+%if %{with tests}
 %check
 make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
+%endif
 
 
 %clean
@@ -54,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Jan 26 2016 Ville Skyttä <ville.skytta@iki.fi>
+- Disable tests on EL (python-pexpect N/A, too old kernel-headers on 5 and 6)
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.6.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
