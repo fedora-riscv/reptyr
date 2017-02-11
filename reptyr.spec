@@ -6,7 +6,7 @@
 
 Name:           reptyr
 Version:        0.6.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -65,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
