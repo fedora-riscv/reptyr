@@ -6,7 +6,7 @@
 
 Name:           reptyr
 Version:        0.6.2
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -14,6 +14,8 @@ License:        MIT
 URL:            http://github.com/nelhage/reptyr
 # https://github.com/nelhage/reptyr/tags
 Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
+Patch0:         https://github.com/nelhage/reptyr/commit/fa0d63ff8c488be15976e5353580b565e85586a1.patch
+Patch1:         https://github.com/nelhage/reptyr/commit/b45fd9238958fcf2d8f3d6fc23e6d491febea2ac.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ExclusiveArch:  %{ix86} x86_64 %{arm}
@@ -34,6 +36,8 @@ on home.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
+%patch0 -p1
+%patch1 -p1 -F 2
 
 
 %build
@@ -65,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Feb 20 2017 Ville Skyttä <ville.skytta@iki.fi> - 0.6.2-6
+- Apply upstream gcc7 build fixes (#1424256)
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 

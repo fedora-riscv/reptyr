@@ -1,0 +1,29 @@
+From fa0d63ff8c488be15976e5353580b565e85586a1 Mon Sep 17 00:00:00 2001
+From: Nelson Elhage <nelhage@nelhage.com>
+Date: Sat, 18 Feb 2017 16:36:40 -0800
+Subject: [PATCH] Placate a gcc7 warning.
+
+(And handle a too-long temp directory with an error instead of a likely
+crash)
+---
+ attach.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/attach.c b/attach.c
+index bd8ef8c..8d9cbf8 100644
+--- a/attach.c
++++ b/attach.c
+@@ -389,8 +389,11 @@ int setup_steal_socket(struct steal_pty_state *steal) {
+         return errno;
+ 
+     steal->addr_un.sun_family = AF_UNIX;
+-    snprintf(steal->addr_un.sun_path, sizeof(steal->addr_un.sun_path),
+-             "%s/reptyr.sock", steal->tmpdir);
++    if (snprintf(steal->addr_un.sun_path, sizeof(steal->addr_un.sun_path),
++                 "%s/reptyr.sock", steal->tmpdir) >= sizeof(steal->addr_un.sun_path)) {
++        error("tmpdir path too long!");
++        return ENAMETOOLONG;
++    }
+ 
+     if ((steal->sockfd = socket(AF_UNIX, SOCK_DGRAM, 0)) < 0)
+         return errno;
