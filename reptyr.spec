@@ -16,7 +16,6 @@ URL:            http://github.com/nelhage/reptyr
 Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
 Patch0:         https://github.com/nelhage/reptyr/commit/fa0d63ff8c488be15976e5353580b565e85586a1.patch
 Patch1:         https://github.com/nelhage/reptyr/commit/b45fd9238958fcf2d8f3d6fc23e6d491febea2ac.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 %if %{with tests}
