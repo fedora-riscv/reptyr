@@ -55,9 +55,6 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %endif
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 
 %files -f %{name}.lang
 %{!?_licensedir:%global license %%doc}
