@@ -6,7 +6,7 @@
 
 Name:           reptyr
 Version:        0.6.2
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -21,6 +21,7 @@ ExclusiveArch:  %{ix86} x86_64 %{arm}
 %if %{with tests}
 BuildRequires:  %{_bindir}/python
 BuildRequires:  python-pexpect
+BuildRequires:  gcc
 # https://github.com/nelhage/reptyr/issues/69
 BuildRequires:  kernel-headers >= 3.4
 %endif
@@ -65,6 +66,9 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Mon Feb 19 2018 Francisco Javier Tsao Santín <tsao@gpul.org> - 0.6.2-10
+- Added gcc to build requirements
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
