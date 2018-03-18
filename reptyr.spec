@@ -6,7 +6,7 @@
 
 Name:           reptyr
 Version:        0.6.2
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -19,8 +19,8 @@ Patch1:         https://github.com/nelhage/reptyr/commit/b45fd9238958fcf2d8f3d6f
 
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 %if %{with tests}
-BuildRequires:  %{_bindir}/python
-BuildRequires:  python-pexpect
+BuildRequires:  %{_bindir}/python2
+BuildRequires:  python2-pexpect
 BuildRequires:  gcc
 # https://github.com/nelhage/reptyr/issues/69
 BuildRequires:  kernel-headers >= 3.4
@@ -66,6 +66,10 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Sun Mar 18 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.6.2-11
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Mon Feb 19 2018 Francisco Javier Tsao Santín <tsao@gpul.org> - 0.6.2-10
 - Added gcc to build requirements
 
