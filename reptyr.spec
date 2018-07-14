@@ -6,7 +6,7 @@
 
 Name:           reptyr
 Version:        0.6.2
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
@@ -66,6 +66,9 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Sun Mar 18 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.6.2-11
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
