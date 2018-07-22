@@ -3,24 +3,22 @@
 %else
 %bcond_with tests
 %endif
-
+%global commit0 f2a60ce3f9ac3a96140472cd1e1e71a448d42293
 Name:           reptyr
 Version:        0.6.2
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        Attach a running process to a new terminal
 
 Group:          Applications/System
 License:        MIT
 URL:            http://github.com/nelhage/reptyr
-# https://github.com/nelhage/reptyr/tags
-Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
-Patch0:         https://github.com/nelhage/reptyr/commit/fa0d63ff8c488be15976e5353580b565e85586a1.patch
-Patch1:         https://github.com/nelhage/reptyr/commit/b45fd9238958fcf2d8f3d6fc23e6d491febea2ac.patch
-
+Source0:        https://github.com/nelhage/reptyr/archive/%{commit0}.tar.gz
+Patch0:         0001-Fedora-Updated-makefile-in-order-to-use-python3-in-t.patch
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 %if %{with tests}
-BuildRequires:  %{_bindir}/python2
-BuildRequires:  python2-pexpect
+Requires: pkgconf-pkg-config
+BuildRequires:  %{_bindir}/python3
+BuildRequires:  python3-pexpect
 BuildRequires:  gcc
 # https://github.com/nelhage/reptyr/issues/69
 BuildRequires:  kernel-headers >= 3.4
@@ -35,9 +33,8 @@ on home.
 
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q -n %{name}-%{commit0}
 %patch0 -p1
-%patch1 -p1 -F 2
 
 
 %build
@@ -58,14 +55,22 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 
 
 %files -f %{name}.lang
+%define bashcomp %(pkg-config --variable=completionsdir bash-completion)
+%if "%{bashcomp}" == "%{nil}"
+%define bashcomp /etc/bash_completion.d
+%endif
+
 %{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc ChangeLog NOTES README.md
 %{_bindir}/reptyr
 %{_mandir}/man1/reptyr.1*
-
+%{bashcomp}/reptyr
 
 %changelog
+* Sun Jul 22 2018 Francisco Javier Tsao Santín <tsao@gpul.org> - 0.6.2-13
+- Upgraded to PR 91 (fix previous issues, add python3 support in tests and bash completion file)
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
