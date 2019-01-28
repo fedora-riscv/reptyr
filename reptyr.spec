@@ -9,7 +9,6 @@ Version:        0.6.2
 Release:        13%{?dist}
 Summary:        Attach a running process to a new terminal
 
-Group:          Applications/System
 License:        MIT
 URL:            http://github.com/nelhage/reptyr
 Source0:        https://github.com/nelhage/reptyr/archive/%{commit0}.tar.gz
