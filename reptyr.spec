@@ -6,7 +6,7 @@
 %global commit0 f2a60ce3f9ac3a96140472cd1e1e71a448d42293
 Name:           reptyr
 Version:        0.6.2
-Release:        14%{?dist}
+Release:        15%{?dist}
 Summary:        Attach a running process to a new terminal
 
 License:        MIT
@@ -67,6 +67,9 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %{bashcomp}/reptyr
 
 %changelog
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-15
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
