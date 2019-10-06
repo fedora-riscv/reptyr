@@ -5,14 +5,13 @@
 %endif
 %global commit0 f2a60ce3f9ac3a96140472cd1e1e71a448d42293
 Name:           reptyr
-Version:        0.6.2
-Release:        15%{?dist}
+Version:        0.7.0
+Release:        1%{?dist}
 Summary:        Attach a running process to a new terminal
 
 License:        MIT
 URL:            http://github.com/nelhage/reptyr
-Source0:        https://github.com/nelhage/reptyr/archive/%{commit0}.tar.gz
-Patch0:         0001-Fedora-Updated-makefile-in-order-to-use-python3-in-t.patch
+Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 %if %{with tests}
 Requires: pkgconf-pkg-config
@@ -32,13 +31,10 @@ on home.
 
 
 %prep
-%setup -q -n %{name}-%{commit0}
-%patch0 -p1
-
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -67,6 +63,9 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %{bashcomp}/reptyr
 
 %changelog
+* Mon Oct 7 2019 Francisco Javier Tsao Santín <tsao@gpul.org> - 0.7.0-1
+- Upgraded to 0.7.0 (#1744587)
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.2-15
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
