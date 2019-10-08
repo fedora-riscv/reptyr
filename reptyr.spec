@@ -32,6 +32,8 @@ on home.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
+sed -i s/sys.stdout/sys.stdout.buffer/g test/tty-steal.py test/basic.py
+sed -i s/python2/python3/g Makefile
 
 %build
 make %{?_smp_mflags} CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
