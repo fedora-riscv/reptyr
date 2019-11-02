@@ -15,9 +15,9 @@ Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar
 ExclusiveArch:  %{ix86} x86_64 %{arm}
 %if %{with tests}
 Requires: pkgconf-pkg-config
+BuildRequires:  gcc
 BuildRequires:  %{_bindir}/python3
 BuildRequires:  python3-pexpect
-BuildRequires:  gcc
 # https://github.com/nelhage/reptyr/issues/69
 BuildRequires:  kernel-headers >= 3.4
 %endif
@@ -33,6 +33,7 @@ on home.
 %prep
 %setup -q -n %{name}-%{name}-%{version}
 sed -i s/sys.stdout/sys.stdout.buffer/g test/tty-steal.py test/basic.py
+sed -i /"child.expect(pexpect.EOF)"/d test/tty-steal.py test/basic.py
 sed -i s/python2/python3/g Makefile
 
 %build
