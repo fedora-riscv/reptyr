@@ -5,8 +5,8 @@
 %endif
 %global commit0 f2a60ce3f9ac3a96140472cd1e1e71a448d42293
 Name:           reptyr
-Version:        0.7.0
-Release:        3%{?dist}
+Version:        0.8.0
+Release:        1%{?dist}
 Summary:        Attach a running process to a new terminal
 
 License:        MIT
@@ -32,8 +32,6 @@ on home.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
-sed -i s/sys.stdout/sys.stdout.buffer/g test/tty-steal.py test/basic.py
-sed -i /"child.expect(pexpect.EOF)"/d test/tty-steal.py test/basic.py
 sed -i s/python2/python3/g Makefile
 
 %build
@@ -66,6 +64,9 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %{bashcomp}/reptyr
 
 %changelog
+* Mon Nov 23 2020 Francisco Javier Tsao Santín <tsao@disroot.org> - 0.8.0-1
+- Upgraded to 0.8.0 (#1883748)
+
 * Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.7.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
