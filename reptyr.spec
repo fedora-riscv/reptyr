@@ -13,6 +13,7 @@ License:        MIT
 URL:            http://github.com/nelhage/reptyr
 Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
 ExclusiveArch:  %{ix86} x86_64 %{arm}
+BuildRequires: make
 %if %{with tests}
 Requires: pkgconf-pkg-config
 BuildRequires:  gcc
