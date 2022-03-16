@@ -1,8 +1,3 @@
-%if 0%{?fedora}
-%bcond_without tests
-%else
-%bcond_with tests
-%endif
 %global commit0 f2a60ce3f9ac3a96140472cd1e1e71a448d42293
 Name:           reptyr
 Version:        0.8.0
@@ -12,16 +7,14 @@ Summary:        Attach a running process to a new terminal
 License:        MIT
 URL:            http://github.com/nelhage/reptyr
 Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
-ExclusiveArch:  %{ix86} x86_64 %{arm}
+ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64
 BuildRequires: make
-%if %{with tests}
 Requires: pkgconf-pkg-config
 BuildRequires:  gcc
 BuildRequires:  %{_bindir}/python3
 BuildRequires:  python3-pexpect
 # https://github.com/nelhage/reptyr/issues/69
 BuildRequires:  kernel-headers >= 3.4
-%endif
 
 %description
 reptyr is a utility for taking an existing running program and
@@ -44,11 +37,8 @@ make install PREFIX="%{_prefix}" DESTDIR="$RPM_BUILD_ROOT"
 %find_lang %{name} --with-man
 
 
-%if %{with tests}
 %check
 make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
-%endif
-
 
 
 %files -f %{name}.lang
@@ -65,6 +55,9 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %{bashcomp}/reptyr
 
 %changelog
+* Wed Mar 23 2022 Francisco Javier Tsao Santín <tsao@disroot.org> - 0.8.0-5
+- Removed no longer needed conditionals on testing (fixes EPEL9 build)
+
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.8.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
