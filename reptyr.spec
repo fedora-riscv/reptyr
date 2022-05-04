@@ -1,7 +1,7 @@
 %global commit0 f2a60ce3f9ac3a96140472cd1e1e71a448d42293
 Name:           reptyr
-Version:        0.8.0
-Release:        4%{?dist}
+Version:        0.9.0
+Release:        1%{?dist}
 Summary:        Attach a running process to a new terminal
 
 License:        MIT
@@ -55,6 +55,9 @@ make test CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="$RPM_LD_FLAGS"
 %{bashcomp}/reptyr
 
 %changelog
+* Mon Jun 20 2022 Francisco Javier Tsao Santín <tsao@disroot.org> - 0.9.0-1
+- Upgrade to 0.9.0 version
+
 * Wed Mar 23 2022 Francisco Javier Tsao Santín <tsao@disroot.org> - 0.8.0-5
 - Removed no longer needed conditionals on testing (fixes EPEL9 build)
 
