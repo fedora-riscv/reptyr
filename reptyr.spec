@@ -1,6 +1,5 @@
-%global commit0 f2a60ce3f9ac3a96140472cd1e1e71a448d42293
 Name:           reptyr
-Version:        0.9.0
+Version:        0.10.0
 Release:        %autorelease
 Summary:        Attach a running process to a new terminal
 
@@ -8,8 +7,8 @@ License:        MIT
 URL:            http://github.com/nelhage/reptyr
 Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
 ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64
-BuildRequires: make
-Requires: pkgconf-pkg-config
+BuildRequires:  make
+Requires:       pkgconf-pkg-config
 BuildRequires:  gcc
 BuildRequires:  %{_bindir}/python3
 BuildRequires:  python3-pexpect
