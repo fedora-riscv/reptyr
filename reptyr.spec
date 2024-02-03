@@ -6,7 +6,7 @@ Summary:        Attach a running process to a new terminal
 License:        MIT
 URL:            http://github.com/nelhage/reptyr
 Source0:        https://github.com/nelhage/reptyr/archive/%{name}-%{version}.tar.gz
-ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64
+ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64 riscv64
 BuildRequires:  make
 Requires:       pkgconf-pkg-config
 BuildRequires:  gcc
